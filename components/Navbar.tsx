@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import "./Navbar.css";
 
 // ---------------------------------------------------------------------------
 // Data
@@ -65,73 +64,80 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="navbar" id="main-navbar">
-      <nav className="navbar__inner" aria-label="Main navigation">
+    <header
+      className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-[14px] border-b border-black/5 transition-shadow duration-300 hover:shadow-[0_1px_12px_rgba(0,0,0,0.04)]"
+      id="main-navbar"
+    >
+      <nav
+        className="flex items-center justify-between max-w-[1400px] mx-auto px-5 py-3 lg:px-10 lg:py-3.5"
+        aria-label="Main navigation"
+      >
         {/* ---- Left: Logo + socials ---- */}
-        <div className="navbar__left">
-          <Link href="/" className="navbar__logo" aria-label="Nexpixelo Home">
+        <div className="flex items-center gap-3.5">
+          <Link
+            href="/"
+            className="flex items-center shrink-0 transition-opacity duration-200 hover:opacity-85"
+            aria-label="Nexpixelo Home"
+          >
             <Image
               src="/logo.svg"
               alt="Nexpixelo"
               width={180}
               height={32}
               priority
-              className="navbar__logo-img"
+              style={{ width: "auto", height: "auto" }}
+              className="h-7 md:h-8"
             />
           </Link>
 
-          <div className="navbar__socials" aria-label="Social links">
+          <div className="flex items-center gap-1.5" aria-label="Social links">
             <a
               href="https://dribbble.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="navbar__social-link"
+              className="flex items-center justify-center shrink-0 leading-none rounded-full transition-transform duration-200 hover:scale-110"
               aria-label="Dribbble"
             >
-              <Image
-                src="/dribble.svg"
-                alt="Dribbble"
-                width={34}
-                height={34}
-              />
+              <Image src="/dribble.svg" alt="Dribbble" width={34} height={34} />
             </a>
             <a
               href="https://behance.net"
               target="_blank"
               rel="noopener noreferrer"
-              className="navbar__social-link"
+              className="flex items-center justify-center shrink-0 leading-none rounded-full transition-transform duration-200 hover:scale-110"
               aria-label="Behance"
             >
-              <Image
-                src="/behance.svg"
-                alt="Behance"
-                width={34}
-                height={34}
-              />
+              <Image src="/behance.svg" alt="Behance" width={34} height={34} />
             </a>
           </div>
         </div>
 
         {/* ---- Right: Desktop nav + CTA ---- */}
-        <div className="navbar__right">
-          <ul className="navbar__links">
+        <div className="hidden md:flex items-center gap-1.5">
+          <ul className="flex items-center gap-0.5 m-0 p-0 list-none">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
-                <Link href={href} className="navbar__link">
+                <Link
+                  href={href}
+                  className="inline-flex items-center px-5 py-2 rounded-full text-sm font-medium text-foreground no-underline border border-black/5 transition-colors duration-200 hover:bg-black/5 hover:border-black/15"
+                >
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
 
-          <Link href="/contact" className="navbar__cta">
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center px-6 py-2 ml-1 rounded-full text-sm font-semibold text-white no-underline bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-200 whitespace-nowrap hover:-translate-y-[1px] hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] active:translate-y-0"
+          >
             Get In Touch
           </Link>
         </div>
 
         {/* ---- Mobile toggle ---- */}
         <button
-          className="navbar__toggle"
+          className="flex items-center justify-center p-2 border-none bg-transparent text-foreground cursor-pointer rounded-lg transition-colors duration-200 hover:bg-black/5 md:hidden"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
@@ -142,15 +148,18 @@ export default function Navbar() {
 
       {/* ---- Mobile drawer ---- */}
       <div
-        className={`navbar__mobile ${mobileOpen ? "navbar__mobile--open" : ""}`}
+        className={`flex flex-col md:hidden overflow-hidden bg-white/98 backdrop-blur-[14px] transition-all duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${mobileOpen
+          ? "max-h-[400px] pt-4 px-5 pb-6 border-b border-black/5 gap-2"
+          : "max-h-0 px-5 py-0 gap-0"
+          }`}
         aria-hidden={!mobileOpen}
       >
-        <ul className="navbar__mobile-links">
+        <ul className="flex flex-col gap-1 m-0 p-0 list-none">
           {NAV_LINKS.map(({ label, href }) => (
             <li key={href}>
               <Link
                 href={href}
-                className="navbar__mobile-link"
+                className="block px-4 py-3 rounded-xl text-[15px] font-medium text-foreground no-underline transition-colors duration-200 hover:bg-black/[0.04]"
                 onClick={() => setMobileOpen(false)}
               >
                 {label}
@@ -160,7 +169,7 @@ export default function Navbar() {
         </ul>
         <Link
           href="/contact"
-          className="navbar__cta navbar__cta--mobile"
+          className="inline-flex items-center justify-center px-6 py-3 mt-2 rounded-full text-base font-semibold text-white no-underline bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-200 whitespace-nowrap"
           onClick={() => setMobileOpen(false)}
         >
           Get In Touch

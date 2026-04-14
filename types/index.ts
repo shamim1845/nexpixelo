@@ -76,25 +76,52 @@ export interface Service {
   title: string;
   description: string;
   icon: string | null;
+  iconImage: SanityImage | null;
   color: string | null;
   order: number | null;
+}
+
+/** Hero section fields. */
+export interface HeroSection {
+  title: string;
+  subtitle: string | null;
+  primaryCta: CtaLink | null;
+  marqueeList:
+    | { _key: string; text_1: string; text_2: string }[]
+    | null;
+}
+
+/** About / stats section fields. */
+export interface AboutSection {
+  heading: string | null;
+  description: string | null;
+  stats: Stat[] | null;
+}
+
+/** About CTA section fields. */
+export interface AboutCtaSection {
+  heading: string | null;
+  description: string | null;
+  image: SanityImage | null;
 }
 
 /** Homepage singleton — all editable sections. */
 export interface HomePage {
   _id: string;
-  heroTitle: string;
-  heroSubtitle: string | null;
-  heroImage: SanityImage | null;
-  heroPrimaryCta: CtaLink | null;
-  heroSecondaryCta: CtaLink | null;
-  aboutHeading: string | null;
-  aboutDescription: string | null;
-  aboutImage: SanityImage | null;
-  stats: Stat[] | null;
-  ctaHeading: string | null;
-  ctaDescription: string | null;
-  newsletterHeading: string | null;
-  newsletterSubheading: string | null;
-  newsletterImage: SanityImage | null;
+  hero: HeroSection | null;
+  about: AboutSection | null;
+  aboutCta: AboutCtaSection | null;
 }
+
+/** Client testimonial. */
+export interface Testimonial {
+  _id: string;
+  quote: string;
+  name: string;
+  role: string;
+  avatar: SanityImage | null;
+  color: string | null;
+  order: number | null;
+}
+
+

@@ -4,39 +4,68 @@ export const service = defineType({
   name: "service",
   title: "Service",
   type: "document",
+  icon: () => "✨",
   fields: [
     defineField({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().min(2).max(60),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "text",
       rows: 4,
-      validation: (rule) => rule.required().max(300),
+      validation: (rule) => rule.required().min(10).max(300),
     }),
     defineField({
       name: "icon",
-      title: "Icon Name",
+      title: "Predefined Icon",
       type: "string",
-      description:
-        'Icon identifier used on the frontend (e.g. "palette", "code", "megaphone").',
+      description: "Select a predefined icon for the service.",
+      options: {
+        list: [
+          { title: "UI/UX Design", value: "ui-ux" },
+          { title: "Web Design", value: "web-design" },
+          { title: "Marketing", value: "marketing" },
+          { title: "Webflow", value: "webflow" },
+        ],
+      },
+    }),
+    defineField({
+      name: "iconImage",
+      title: "Custom Icon Image",
+      type: "image",
+      description: "Upload a custom icon. This will override the predefined icon above if provided.",
+      options: { hotspot: true },
     }),
     defineField({
       name: "color",
       title: "Accent Color",
       type: "string",
-      description: 'CSS color value (e.g. "#6C5CE7", "hsl(260 60% 55%)").',
+      description: 'Card background hex color (e.g. "#D5CFEF").',
+      validation: (rule) =>
+        rule.regex(/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/, {
+          name: "hex color",
+          invert: false,
+        }),
     }),
     defineField({
       name: "order",
       title: "Display Order",
       type: "number",
+      description: "Lower numbers appear first.",
+      initialValue: 0,
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "description",
+      media: "iconImage",
+    },
+  },
   orderings: [
     {
       title: "Display Order",

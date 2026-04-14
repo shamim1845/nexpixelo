@@ -3,48 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import "./HeroSection.css";
 
-import type { HomePage } from "@/types";
-
-// ---------------------------------------------------------------------------
-// Floating tag data (static decorative elements)
-// ---------------------------------------------------------------------------
-
-const FLOATING_TAGS = [
-  {
-    icon: "/logo_web_design.svg",
-    label: "Web Design",
-    color: "#FFF3E0",
-    iconW: 40,
-    iconH: 28,
-    position: "hero__tag--top-left" as const,
-  },
-  {
-    icon: "/logo_ui_ux.svg",
-    label: "UI/UX",
-    color: "#F3E5F5",
-    iconW: 32,
-    iconH: 32,
-    position: "hero__tag--top-right" as const,
-  },
-  {
-    icon: "/logo_marketing.svg",
-    label: "Marketing",
-    color: "#E8F5E9",
-    iconW: 36,
-    iconH: 36,
-    position: "hero__tag--bottom-left" as const,
-  },
-  {
-    icon: "/logo_webflow.svg",
-    label: "Webflow",
-    color: "#E3F2FD",
-    iconW: 36,
-    iconH: 22,
-    position: "hero__tag--bottom-right" as const,
-  },
-];
+import type { HeroSection } from "@/types";
 
 // ---------------------------------------------------------------------------
 // Animation variants
@@ -75,21 +35,12 @@ const float = (delay: number, duration: number, y: number) => ({
   },
 });
 
-const tagReveal = (delay: number) => ({
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.6, delay, ease: EASE },
-  },
-});
-
 // ---------------------------------------------------------------------------
 // Props
 // ---------------------------------------------------------------------------
 
 interface HeroSectionProps {
-  data: HomePage | null;
+  data: HeroSection | null | undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -97,71 +48,42 @@ interface HeroSectionProps {
 // ---------------------------------------------------------------------------
 
 export default function HeroSection({ data }: HeroSectionProps) {
-  const heroTitle = data?.heroTitle ?? "";
+  const heroTitle = data?.title ?? "";
   const heroSubtitle =
-    data?.heroSubtitle ??
+    data?.subtitle ??
     "";
-  const primaryCta = data?.heroPrimaryCta ?? { label: "Start", href: "/contact" };
+  const primaryCta = data?.primaryCta ?? {};
+  const marqueeList = data?.marqueeList ?? [];
 
   return (
-    <section className="hero" id="hero-section">
-      {/* Background gradient orbs */}
-      <div className="hero__bg" aria-hidden="true">
-        <div className="hero__orb hero__orb--1" />
-        <div className="hero__orb hero__orb--2" />
-        <div className="hero__orb hero__orb--3" />
-      </div>
+    <section
+      className="relative overflow-hidden min-h-[calc(100dvh-58px)] flex items-center justify-center px-5 py-12 md:py-16 md:px-8 lg:py-20 lg:px-10"
+      id="hero-section"
+    >
 
-      <div className="hero__container">
-        {/* ---------- Floating tags ---------- */}
-        <div className="hero__tags" aria-hidden="true">
-          {FLOATING_TAGS.map((tag, i) => (
-            <motion.div
-              key={tag.label}
-              className={`hero__tag ${tag.position}`}
-              variants={tagReveal(0.4 + i * 0.15)}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.div
-                className="hero__tag-inner"
-                style={{ background: tag.color }}
-                {...float(i * 0.5, 3 + i * 0.4, 8 + i * 2)}
-              >
-                <Image
-                  src={tag.icon}
-                  alt={tag.label}
-                  width={tag.iconW}
-                  height={tag.iconH}
-                />
-                <span className="hero__tag-label">{tag.label}</span>
-              </motion.div>
-            </motion.div>
-          ))}
-        </div>
-
+      <div className="relative z-20 w-full max-w-[1200px] mx-auto">
         {/* ---------- Star decorations ---------- */}
-        <div className="hero__stars" aria-hidden="true">
+        <div className="hidden md:block absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
           <motion.div
-            className="hero__star hero__star--purple"
+            className="absolute top-[2%] left-[35%] xl:top-[5%] xl:left-[32%]"
             {...float(0, 4, 10)}
           >
             <Image src="/star_purple.svg" alt="" width={50} height={48} />
           </motion.div>
           <motion.div
-            className="hero__star hero__star--orange-group"
+            className="absolute top-[15%] right-[15%] xl:top-[10%] xl:right-[12%]"
             {...float(0.5, 3.5, 8)}
           >
             <Image src="/star_orange_group.svg" alt="" width={56} height={52} />
           </motion.div>
           <motion.div
-            className="hero__star hero__star--white"
+            className="absolute bottom-[30%] left-[12%] xl:bottom-[35%] xl:left-[15%]"
             {...float(1, 3, 6)}
           >
             <Image src="/star_white.svg" alt="" width={22} height={22} />
           </motion.div>
           <motion.div
-            className="hero__star hero__star--orange"
+            className="absolute bottom-[20%] right-[25%] xl:bottom-[25%] xl:right-[22%]"
             {...float(0.3, 3.8, 7)}
           >
             <Image src="/star_orange.svg" alt="" width={28} height={28} />
@@ -169,23 +91,23 @@ export default function HeroSection({ data }: HeroSectionProps) {
         </div>
 
         {/* ---------- Main content ---------- */}
-        <div className="hero__content">
+        <div className="relative z-20 text-center flex flex-col items-center gap-6 lg:gap-8">
           <motion.h1
-            className="hero__heading"
+            className="text-[clamp(2.5rem,8vw,6rem)] font-black leading-none tracking-[-0.02em] md:tracking-[-0.03em] uppercase text-foreground max-w-[900px]"
             custom={0}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
           >
             {heroTitle.split("\n").map((line, i) => (
-              <span key={i} className="hero__heading-line">
+              <span key={i} className="block">
                 {line}
               </span>
             ))}
           </motion.h1>
 
           <motion.p
-            className="hero__subtitle"
+            className="text-[clamp(0.9375rem,1.5vw,1.125rem)] leading-[1.6] text-[#666] max-w-[500px] lg:max-w-[540px] mx-auto"
             custom={1}
             variants={fadeUp}
             initial="hidden"
@@ -195,7 +117,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
           </motion.p>
 
           <motion.div
-            className="hero__actions"
+            className="flex items-center gap-3 mt-2"
             custom={2}
             variants={fadeUp}
             initial="hidden"
@@ -203,7 +125,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
           >
             <Link
               href={primaryCta.href ?? "/contact"}
-              className="hero__btn hero__btn--primary"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-semibold no-underline transition-all duration-200 ease-out whitespace-nowrap bg-[#0a0a0a] text-white shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 active:translate-y-0"
             >
               {primaryCta.label ?? "Start"}
               <Image
@@ -211,18 +133,54 @@ export default function HeroSection({ data }: HeroSectionProps) {
                 alt=""
                 width={28}
                 height={28}
-                className="hero__btn-arrow"
+                className="shrink-0"
               />
             </Link>
 
-            <motion.div className="hero__btn-stars" {...float(0, 2.5, 5)}>
+            <motion.div className="hidden sm:flex" {...float(0, 2.5, 5)}>
               <Image src="/star_orange.svg" alt="" width={20} height={20} />
             </motion.div>
-
-
           </motion.div>
         </div>
       </div>
+
+      {/* ---------- Infinite Marquee Background Overlay ---------- */}
+      {marqueeList.length > 0 && (
+        <div
+          className="absolute left-1/2 bottom-[12%] md:bottom-[15%] w-[120vw] -translate-x-1/2 -rotate-[4deg] overflow-hidden pointer-events-none z-10 flex"
+          aria-hidden="true"
+        >
+          <motion.div
+            className="flex w-max space-x-6 py-8 items-center"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
+          >
+            {/* Repeat the list multiple times to ensure seamless infinite scrolling */}
+            {[...marqueeList, ...marqueeList, ...marqueeList, ...marqueeList].map(
+              (item, i) => {
+                const bgColor = i % 2 === 0 ? "#BDBCFF" : "#FFB44B";
+                return (
+                  <div
+                    key={`${item._key}-${i}`}
+                    className="flex items-center gap-3 px-8 mx-3 py-3 md:py-4 rounded-[40px] border-2 md:border-[3px] border-[#0a0a0a] shadow-[4px_4px_0_0_#0a0a0a] md:shadow-[6px_6px_0_0_#0a0a0a] pointer-events-auto"
+                    style={{ backgroundColor: bgColor }}
+                  >
+                    <span className="text-[17px] md:text-[22px] font-bold text-[#0a0a0a] leading-none whitespace-nowrap">
+                      {item.text_1}
+                    </span>
+                    <span className="text-[20px] md:text-[26px] opacity-80 px-2 text-[#0a0a0a] leading-none">
+                      ✦
+                    </span>
+                    <span className="text-[17px] md:text-[22px] font-bold text-[#0a0a0a] leading-none whitespace-nowrap">
+                      {item.text_2}
+                    </span>
+                  </div>
+                );
+              }
+            )}
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 }

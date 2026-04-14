@@ -7,6 +7,7 @@ import {
   SERVICES_QUERY,
   HOME_PAGE_QUERY,
   CATEGORIES_QUERY,
+  TESTIMONIALS_QUERY,
 } from "@/lib/queries";
 import type {
   Project,
@@ -14,6 +15,7 @@ import type {
   Service,
   HomePage,
   Category,
+  Testimonial,
 } from "@/types";
 
 // ---------------------------------------------------------------------------
@@ -102,5 +104,17 @@ export async function getCategories(): Promise<Category[]> {
     CATEGORIES_QUERY,
     {},
     { next: { revalidate: REVALIDATE, tags: ["categories"] } },
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Testimonials
+// ---------------------------------------------------------------------------
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  return client.fetch<Testimonial[]>(
+    TESTIMONIALS_QUERY,
+    {},
+    { next: { revalidate: REVALIDATE, tags: ["testimonials"] } },
   );
 }

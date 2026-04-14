@@ -6,6 +6,7 @@ import { homePage } from "./homePage";
 import { post } from "./post";
 import { project } from "./project";
 import { service } from "./service";
+import { testimonial } from "./testimonial";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Primitives / reusable types
@@ -17,4 +18,5 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   post,
   project,
   service,
+  testimonial,
 ];

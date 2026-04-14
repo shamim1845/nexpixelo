@@ -76,6 +76,7 @@ export const SERVICES_QUERY = defineQuery(`
     title,
     description,
     icon,
+    iconImage,
     color,
     order
   }
@@ -89,20 +90,22 @@ export const SERVICES_QUERY = defineQuery(`
 export const HOME_PAGE_QUERY = defineQuery(`
   *[_type == "homePage"][0] {
     _id,
-    heroTitle,
-    heroSubtitle,
-    heroImage,
-    heroPrimaryCta,
-    heroSecondaryCta,
-    aboutHeading,
-    aboutDescription,
-    aboutImage,
-    stats,
-    ctaHeading,
-    ctaDescription,
-    newsletterHeading,
-    newsletterSubheading,
-    newsletterImage
+    hero {
+      title,
+      subtitle,
+      primaryCta,
+      marqueeList
+    },
+    about {
+      heading,
+      description,
+      stats
+    },
+    aboutCta {
+      heading,
+      description,
+      image
+    }
   }
 `);
 
@@ -119,3 +122,21 @@ export const CATEGORIES_QUERY = defineQuery(`
     description
   }
 `);
+
+// ---------------------------------------------------------------------------
+// Testimonials
+// ---------------------------------------------------------------------------
+
+/** All testimonials ordered by display order. */
+export const TESTIMONIALS_QUERY = defineQuery(`
+  *[_type == "testimonial"] | order(order asc, _createdAt desc) {
+    _id,
+    quote,
+    name,
+    role,
+    avatar,
+    color,
+    order
+  }
+`);
+
