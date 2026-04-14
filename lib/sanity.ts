@@ -26,6 +26,11 @@ export const client = createClient({
   dataset,
   apiVersion,
   useCdn: process.env.NODE_ENV === "production",
+  stega: {
+    studioUrl: "/studio",
+    // Force stega metadata insertion for overlays
+    enabled: true,
+  },
 });
 
 // ---------------------------------------------------------------------------

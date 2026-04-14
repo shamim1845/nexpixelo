@@ -21,6 +21,9 @@ export default async function HomePage() {
     getPosts(),
   ]);
 
+  console.log({ posts });
+
+
   return (
     <main className="flex flex-1 flex-col bg-white">
       <div className="bg-[#FCEDF9]">

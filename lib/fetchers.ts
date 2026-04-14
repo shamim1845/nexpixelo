@@ -1,4 +1,4 @@
-import { client } from "@/lib/sanity";
+import { sanityFetch } from "@/sanity/lib/live";
 import {
   PROJECTS_QUERY,
   PROJECT_BY_SLUG_QUERY,
@@ -34,21 +34,20 @@ const REVALIDATE = 60; // 60 seconds
 // ---------------------------------------------------------------------------
 
 export async function getProjects(): Promise<Project[]> {
-  return client.fetch<Project[]>(
-    PROJECTS_QUERY,
-    {},
-    { next: { revalidate: REVALIDATE, tags: ["projects"] } },
-  );
+  const { data } = await sanityFetch({
+    query: PROJECTS_QUERY,
+  });
+  return data;
 }
 
 export async function getProjectBySlug(
   slug: string,
 ): Promise<Project | null> {
-  return client.fetch<Project | null>(
-    PROJECT_BY_SLUG_QUERY,
-    { slug },
-    { next: { revalidate: REVALIDATE, tags: ["projects"] } },
-  );
+  const { data } = await sanityFetch({
+    query: PROJECT_BY_SLUG_QUERY,
+    params: { slug },
+  });
+  return data;
 }
 
 // ---------------------------------------------------------------------------
@@ -56,19 +55,18 @@ export async function getProjectBySlug(
 // ---------------------------------------------------------------------------
 
 export async function getPosts(): Promise<Post[]> {
-  return client.fetch<Post[]>(
-    POSTS_QUERY,
-    {},
-    { next: { revalidate: REVALIDATE, tags: ["posts"] } },
-  );
+  const { data } = await sanityFetch({
+    query: POSTS_QUERY,
+  });
+  return data;
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  return client.fetch<Post | null>(
-    POST_BY_SLUG_QUERY,
-    { slug },
-    { next: { revalidate: REVALIDATE, tags: ["posts"] } },
-  );
+  const { data } = await sanityFetch({
+    query: POST_BY_SLUG_QUERY,
+    params: { slug },
+  });
+  return data;
 }
 
 // ---------------------------------------------------------------------------
@@ -76,11 +74,10 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 // ---------------------------------------------------------------------------
 
 export async function getServices(): Promise<Service[]> {
-  return client.fetch<Service[]>(
-    SERVICES_QUERY,
-    {},
-    { next: { revalidate: REVALIDATE, tags: ["services"] } },
-  );
+  const { data } = await sanityFetch({
+    query: SERVICES_QUERY,
+  });
+  return data;
 }
 
 // ---------------------------------------------------------------------------
@@ -88,11 +85,10 @@ export async function getServices(): Promise<Service[]> {
 // ---------------------------------------------------------------------------
 
 export async function getHomePage(): Promise<HomePage | null> {
-  return client.fetch<HomePage | null>(
-    HOME_PAGE_QUERY,
-    {},
-    { next: { revalidate: REVALIDATE, tags: ["homePage"] } },
-  );
+  const { data } = await sanityFetch({
+    query: HOME_PAGE_QUERY,
+  });
+  return data;
 }
 
 // ---------------------------------------------------------------------------
@@ -100,11 +96,10 @@ export async function getHomePage(): Promise<HomePage | null> {
 // ---------------------------------------------------------------------------
 
 export async function getCategories(): Promise<Category[]> {
-  return client.fetch<Category[]>(
-    CATEGORIES_QUERY,
-    {},
-    { next: { revalidate: REVALIDATE, tags: ["categories"] } },
-  );
+  const { data } = await sanityFetch({
+    query: CATEGORIES_QUERY,
+  });
+  return data;
 }
 
 // ---------------------------------------------------------------------------
@@ -112,9 +107,8 @@ export async function getCategories(): Promise<Category[]> {
 // ---------------------------------------------------------------------------
 
 export async function getTestimonials(): Promise<Testimonial[]> {
-  return client.fetch<Testimonial[]>(
-    TESTIMONIALS_QUERY,
-    {},
-    { next: { revalidate: REVALIDATE, tags: ["testimonials"] } },
-  );
+  const { data } = await sanityFetch({
+    query: TESTIMONIALS_QUERY,
+  });
+  return data;
 }

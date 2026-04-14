@@ -19,6 +19,10 @@ export default function TestimonialsCarousel({
 
   const loopCards = [...testimonials, ...testimonials, ...testimonials];
 
+  // Disable infinite animations inside the Sanity Presentation Tool iframe
+  // This prevents the VisualEditing MutationObserver from crashing React!
+  const isStudio = typeof window !== "undefined" && window.self !== window.parent;
+
   return (
     <section
       className="overflow-hidden px-4 py-16 md:px-8 md:py-20 lg:px-10"
@@ -26,8 +30,8 @@ export default function TestimonialsCarousel({
     >
       <motion.div
         className="flex w-max items-stretch gap-4 md:gap-5"
-        animate={{ x: ["0%", "-33.333%"] }}
-        transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+        animate={{ x: isStudio ? "0%" : ["0%", "-33.333%"] }}
+        transition={isStudio ? {} : { duration: 28, ease: "linear", repeat: Infinity }}
       >
         {loopCards.map((item, index) => {
           const bgColor = item.color || FALLBACK_COLORS[index % FALLBACK_COLORS.length];

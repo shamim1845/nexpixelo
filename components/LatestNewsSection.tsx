@@ -22,7 +22,7 @@ function formatDate(dateString: string) {
 export default function LatestNewsSection({ posts }: LatestNewsSectionProps) {
   if (!posts || posts.length === 0) return null;
 
-  const latestPosts = posts.slice(0, 2);
+  const latestPosts = posts.slice(0, 5);
 
   return (
     <section className="px-5 py-20 md:px-8 md:py-24 lg:px-10 lg:py-28" id="latest-news-section">

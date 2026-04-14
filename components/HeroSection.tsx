@@ -21,11 +21,11 @@ const fadeUp = {
   }),
 };
 
-const float = (delay: number, duration: number, y: number) => ({
+const float = (delay: number, duration: number, y: number, isStudio: boolean) => ({
   initial: { y: 0 },
   animate: {
-    y: [0, -y, 0],
-    transition: {
+    y: isStudio ? 0 : [0, -y, 0],
+    transition: isStudio ? {} : {
       duration,
       delay,
       repeat: Infinity,
@@ -60,31 +60,36 @@ export default function HeroSection({ data }: HeroSectionProps) {
       className="relative overflow-hidden min-h-[calc(100dvh-58px)] flex items-center justify-center px-5 py-12 md:py-16 md:px-8 lg:py-20 lg:px-10"
       id="hero-section"
     >
+      {/* Disable infinite animations inside the Sanity Presentation Tool iframe */}
+      {/* This prevents the VisualEditing MutationObserver from crashing React! */}
+      {typeof window !== "undefined" && window.self !== window.parent && (
+        <span id="studio-detector" style={{ display: "none" }} />
+      )}
 
       <div className="relative z-20 w-full max-w-[1200px] mx-auto">
         {/* ---------- Star decorations ---------- */}
         <div className="hidden md:block absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
           <motion.div
             className="absolute top-[2%] left-[35%] xl:top-[5%] xl:left-[32%]"
-            {...float(0, 4, 10)}
+            {...float(0, 4, 10, typeof window !== "undefined" && window.self !== window.parent)}
           >
             <Image src="/star_purple.svg" alt="" width={50} height={48} />
           </motion.div>
           <motion.div
             className="absolute top-[15%] right-[15%] xl:top-[10%] xl:right-[12%]"
-            {...float(0.5, 3.5, 8)}
+            {...float(0.5, 3.5, 8, typeof window !== "undefined" && window.self !== window.parent)}
           >
             <Image src="/star_orange_group.svg" alt="" width={56} height={52} />
           </motion.div>
           <motion.div
             className="absolute bottom-[30%] left-[12%] xl:bottom-[35%] xl:left-[15%]"
-            {...float(1, 3, 6)}
+            {...float(1, 3, 6, typeof window !== "undefined" && window.self !== window.parent)}
           >
             <Image src="/star_white.svg" alt="" width={22} height={22} />
           </motion.div>
           <motion.div
             className="absolute bottom-[20%] right-[25%] xl:bottom-[25%] xl:right-[22%]"
-            {...float(0.3, 3.8, 7)}
+            {...float(0.3, 3.8, 7, typeof window !== "undefined" && window.self !== window.parent)}
           >
             <Image src="/star_orange.svg" alt="" width={28} height={28} />
           </motion.div>
@@ -137,7 +142,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
               />
             </Link>
 
-            <motion.div className="hidden sm:flex" {...float(0, 2.5, 5)}>
+            <motion.div className="hidden sm:flex" {...float(0, 2.5, 5, typeof window !== "undefined" && window.self !== window.parent)}>
               <Image src="/star_orange.svg" alt="" width={20} height={20} />
             </motion.div>
           </motion.div>
@@ -147,13 +152,13 @@ export default function HeroSection({ data }: HeroSectionProps) {
       {/* ---------- Infinite Marquee Background Overlay ---------- */}
       {marqueeList.length > 0 && (
         <div
-          className="absolute left-1/2 bottom-[12%] md:bottom-[15%] w-[120vw] -translate-x-1/2 -rotate-[4deg] overflow-hidden pointer-events-none z-10 flex"
+          className="absolute left-1/2 bottom-[12%] md:bottom-[5%] w-[120vw] -translate-x-1/2 -rotate-[4deg] overflow-hidden pointer-events-none z-10 flex"
           aria-hidden="true"
         >
           <motion.div
             className="flex w-max space-x-6 py-8 items-center"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
+            animate={{ x: typeof window !== "undefined" && window.self !== window.parent ? "0%" : ["0%", "-50%"] }}
+            transition={typeof window !== "undefined" && window.self !== window.parent ? {} : { repeat: Infinity, ease: "linear", duration: 35 }}
           >
             {/* Repeat the list multiple times to ensure seamless infinite scrolling */}
             {[...marqueeList, ...marqueeList, ...marqueeList, ...marqueeList].map(

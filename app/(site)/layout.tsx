@@ -22,11 +22,17 @@ export const metadata: Metadata = {
   description: "Nexpixelo — a modern Next.js application.",
 };
 
-export default function RootLayout({
+import { SanityLive } from "@/sanity/lib/live";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { draftMode } from "next/headers";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isDraftMode = (await draftMode()).isEnabled;
+
   return (
     <html
       lang="en"
@@ -37,6 +43,8 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <SanityLive />
+        {isDraftMode && <VisualEditing />}
       </body>
     </html>
   );
