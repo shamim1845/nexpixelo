@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Pin Turbopack root when multiple lockfiles exist (e.g. parent folder).
+  turbopack: {
+    root: process.cwd(),
+  },
 };
 
 export default nextConfig;
