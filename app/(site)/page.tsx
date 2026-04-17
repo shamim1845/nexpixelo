@@ -11,6 +11,7 @@ import LatestNewsSection from "@/components/LatestNewsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ServicesSection from "@/components/ServicesSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import Navbar from "@/components/Navbar";
 
 export default async function HomePage() {
   const [homeData, services, projects, testimonials, posts] = await Promise.all([
@@ -25,21 +26,32 @@ export default async function HomePage() {
 
 
   return (
-    <main className="flex flex-1 flex-col bg-white">
-      <div className="bg-[#FCEDF9]">
+    <main className="">
+      <div
+        style={{
+          background: "linear-gradient(180deg, #E4E3FF 0%, #FFE6F9 43.27%, #FFFFFF 100%)",
+        }}
+      >
+        <Navbar />
         <HeroSection data={homeData?.hero} />
         <ServicesSection services={services} />
       </div>
-      <div className="bg-[#E4DFFF]">
+
+      {/* <div className="bg-[#E4DFFF]">
         <ProjectsSection projects={projects} />
-      </div>
-      <div className="bg-white">
+      </div> */}
+
+
+      {/* <div className="bg-white">
         <AboutSection about={homeData?.about} aboutCta={homeData?.aboutCta} />
         <TestimonialsCarousel testimonials={testimonials} />
-      </div>
+      </div> */}
+
+
+      {/*       
       <div className="bg-[#E4DFFF]">
         <LatestNewsSection posts={posts} />
-      </div>
+      </div> */}
     </main>
   );
 }

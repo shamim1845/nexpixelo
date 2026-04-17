@@ -9,12 +9,9 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 export default defineConfig({
   name: "nexpixelo",
   title: "Nexpixelo",
-
   projectId,
   dataset,
-
   basePath: "/studio",
-
   plugins: [
     structureTool(),
     presentationTool({

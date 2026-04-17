@@ -1,8 +1,8 @@
 import { type SchemaTypeDefinition } from "sanity";
 
 import { blockContent } from "./blockContent";
-import { category } from "./category";
 import { homePage } from "./homePage";
+import { category } from "./category";
 import { post } from "./post";
 import { project } from "./project";
 import { service } from "./service";

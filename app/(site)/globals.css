@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0a0a0a;
+  --foreground: #010212;
   color-scheme: light;
 }
 
@@ -10,12 +10,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter);
+  --font-boldonse: var(--font-boldonse);
+  --font-daysOne: var(--font-daysOne);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
 }

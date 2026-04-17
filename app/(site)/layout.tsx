@@ -1,19 +1,36 @@
+// css
+import "./globals.css";
+// next
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Boldonse, Inter, Days_One } from "next/font/google";
+// sanity
+import { SanityLive } from "@/sanity/lib/live";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { draftMode } from "next/headers";
+// components
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// font
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const boldonse = Boldonse({
+  variable: "--font-boldonse",
   subsets: ["latin"],
+  weight: ["400",],
 });
 
+const daysOne = Days_One({
+  variable: "--font-daysOne",
+  subsets: ["latin"],
+  weight: ["400",],
+});
+
+// metadata
 export const metadata: Metadata = {
   title: {
     default: "Nexpixelo",
@@ -22,27 +39,26 @@ export const metadata: Metadata = {
   description: "Nexpixelo — a modern Next.js application.",
 };
 
-import { SanityLive } from "@/sanity/lib/live";
-import { VisualEditing } from "next-sanity/visual-editing";
-import { draftMode } from "next/headers";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // draft mode check
   const isDraftMode = (await draftMode()).isEnabled;
 
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${inter.variable} ${boldonse.variable} ${daysOne.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh flex flex-col bg-background text-foreground">
-        <Navbar />
         {children}
-        <Footer />
+        {/* <Footer /> */}
+
+        {/* sanity live & visual editing */}
         <SanityLive />
         {isDraftMode && <VisualEditing />}
       </body>
