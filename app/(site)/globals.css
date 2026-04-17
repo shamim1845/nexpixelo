@@ -20,3 +20,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
+
+.content_container {
+  @apply w-full max-w-[1560px] mx-auto px-4 md:px-5 lg:px-8 xl:px-10
+}

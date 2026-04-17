@@ -22,6 +22,7 @@ const boldonse = Boldonse({
   variable: "--font-boldonse",
   subsets: ["latin"],
   weight: ["400",],
+  adjustFontFallback: false,
 });
 
 const daysOne = Days_One({
@@ -54,9 +55,13 @@ export default async function RootLayout({
       className={`${inter.variable} ${boldonse.variable} ${daysOne.variable} antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-dvh flex flex-col bg-background text-foreground">
+      <body className="min-h-dvh flex flex-col bg-background text-foreground"
+        style={{
+          background: "linear-gradient(180deg, #E4E3FF 0%, #FFE6F9 43.27%, #FFFFFF 100%)",
+        }}>
+        <Navbar />
         {children}
-        {/* <Footer /> */}
+        <Footer />
 
         {/* sanity live & visual editing */}
         <SanityLive />

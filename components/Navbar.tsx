@@ -3,6 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
+const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+
+const navVariants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.1, ease: EASE },
+  }),
+};
 
 // ---------------------------------------------------------------------------
 // Data
@@ -65,31 +77,46 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-[14px] transition-shadow duration-300 "
+      className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-[14px] transition-shadow duration-300"
       id="main-navbar"
     >
       <nav
-        className="flex items-center justify-between max-w-[1400px] mx-auto px-5 py-3 lg:px-6 xl:px-10 lg:py-3.5"
+        className="content_container flex items-center justify-between py-3 lg:py-3.5"
         aria-label="Main navigation"
       >
         {/* ---- Left: Logo + socials ---- */}
         <div className="flex items-center gap-2 lg:gap-3 xl:gap-4">
-          <Link
-            href="/"
-            className="flex items-center shrink-0 transition-opacity duration-200 hover:opacity-85 w-[160px] sm:w-[200px] lg:w-[200px] xl:w-[254px]"
-            aria-label="Nexpixelo Home"
+          <motion.div
+            variants={navVariants}
+            custom={0}
+            initial="hidden"
+            animate="visible"
           >
-            <Image
-              src="/logo.svg"
-              alt="Nexpixelo"
-              width={254}
-              height={46}
-              priority
-              className="w-full h-auto"
-            />
-          </Link>
+            <Link
+              href="/"
+              className="flex items-center shrink-0 transition-opacity duration-200 hover:opacity-85 w-[160px] sm:w-[200px] lg:w-[200px] xl:w-[254px]"
+              aria-label="Nexpixelo Home"
+            >
+              <Image
+                src="/logo.svg"
+                alt="Nexpixelo"
+                width={254}
+                height={46}
+                priority
+                loading="eager"
+                className="w-full h-auto"
+              />
+            </Link>
+          </motion.div>
 
-          <div className="flex items-center gap-1.5 lg:gap-1.5 xl:gap-2 shrink-0" aria-label="Social links">
+          <motion.div
+            className="flex items-center gap-1.5 lg:gap-1.5 xl:gap-2 shrink-0"
+            aria-label="Social links"
+            variants={navVariants}
+            custom={1}
+            initial="hidden"
+            animate="visible"
+          >
             <a
               href="https://dribbble.com"
               target="_blank"
@@ -108,17 +135,20 @@ export default function Navbar() {
             >
               <Image src="/behance.svg" alt="Behance" width={50} height={50} className="w-[34px] h-[34px] lg:w-[40px] lg:h-[40px] xl:w-[50px] xl:h-[50px]" />
             </a>
-          </div>
+          </motion.div>
         </div>
 
         {/* ---- Right: Desktop nav + CTA ---- */}
         <div className="hidden lg:flex items-center gap-3 xl:gap-6 shrink-0 z-10">
-          <ul className="flex items-center gap-2 xl:gap-4 m-0 p-0 list-none">
+          <motion.ul
+            className="flex items-center gap-2 xl:gap-4 m-0 p-0 list-none"
+            variants={navVariants}
+            custom={2}
+            initial="hidden"
+            animate="visible"
+          >
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
-
-
-
                 <Link
                   href={href}
                   className="inline-flex items-center w-fit h-[44px] xl:h-[50px] px-4 xl:px-6 py-2 rounded-full text-[15px] xl:text-[18px] font-medium text-foreground no-underline bg-[#FFFFFF33] hover:bg-[#ffffff99] border border-white/70 hover:border-white transition-colors duration-200 whitespace-nowrap"
@@ -127,18 +157,29 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-          </ul>
+          </motion.ul>
 
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center w-fit h-[50px] xl:h-[60px] px-6 xl:px-8 py-2 ml-1 rounded-full text-[14px] xl:text-[16px] font-daysOne font-medium text-white bg-[#000000] border border-black shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-200 whitespace-nowrap hover:-translate-y-[1px] hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] active:translate-y-0"
+          <motion.div
+            variants={navVariants}
+            custom={3}
+            initial="hidden"
+            animate="visible"
           >
-            Get In Touch
-          </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center w-fit h-[50px] xl:h-[60px] px-6 xl:px-8 py-2 ml-1 rounded-full text-[14px] xl:text-[16px] font-daysOne font-medium text-white bg-[#000000] border border-black shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-200 whitespace-nowrap hover:-translate-y-[1px] hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] active:translate-y-0"
+            >
+              Get In Touch
+            </Link>
+          </motion.div>
         </div>
 
         {/* ---- Mobile toggle ---- */}
-        <button
+        <motion.button
+          variants={navVariants}
+          custom={2}
+          initial="hidden"
+          animate="visible"
           className="flex items-center justify-center w-[44px] h-[44px] border border-white/70 bg-[#FFFFFF33] text-foreground cursor-pointer rounded-full outline-none focus:outline-none transition-colors duration-200 hover:bg-[#ffffff99] hover:border-white lg:hidden"
           style={{ WebkitTapHighlightColor: "transparent" }}
           onClick={() => setMobileOpen((v) => !v)}
@@ -146,7 +187,7 @@ export default function Navbar() {
           aria-expanded={mobileOpen}
         >
           {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-        </button>
+        </motion.button>
       </nav>
 
       {/* ---- Mobile drawer ---- */}

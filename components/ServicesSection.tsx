@@ -7,21 +7,6 @@ import { urlFor } from "@/lib/sanity";
 import type { Service } from "@/types";
 
 // ---------------------------------------------------------------------------
-// Default pastel palette — used when no `color` is set in Sanity
-// ---------------------------------------------------------------------------
-
-const PASTEL_COLORS = [
-  "#D5CFEF", // lavender
-  "#F8D5D0", // rose
-  "#D1EDDA", // mint
-  "#F3D9F5", // pink
-  "#D5E8F5", // sky
-  "#FDE8C8", // peach
-  "#E0F0E3", // sage
-  "#F5E6A3", // butter
-];
-
-// ---------------------------------------------------------------------------
 // Icon map — maps Sanity `icon` string to a public SVG path.
 // Fall back to a generic dot if the icon isn't in the map.
 // ---------------------------------------------------------------------------
@@ -55,26 +40,6 @@ const cardVariants = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// Arrow icon (inline SVG)
-// ---------------------------------------------------------------------------
-
-function ArrowIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="w-5 h-5 text-neutral-900"
-    >
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
-  );
-}
 
 // ---------------------------------------------------------------------------
 // Props
@@ -92,37 +57,27 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
   if (!services || services.length === 0) return null;
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-24 lg:py-28 px-5 md:px-8 lg:px-10" id="services-section">
-      <div className="w-full max-w-6xl mx-auto">
-        {/* Section header */}
-        <motion.div
-          className="text-center mb-14"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: EASE }}
-        >
-          <p className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-widest uppercase text-neutral-500 mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-            What We Do
-          </p>
-          <h2 className="text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.1] tracking-tight text-foreground">
-            Our Services
-          </h2>
-        </motion.div>
+    <section className="relative overflow-hidden py-20 md:py-24 lg:py-28" id="services-section">
+      <div className="content_container">
 
         {/* Cards grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-x-8 sm:gap-y-20 lg:gap-0"
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
         >
           {services.map((service, i) => {
-            const bgColor =
-              service.color || PASTEL_COLORS[i % PASTEL_COLORS.length];
+            const colors = ["#E7E6FF", "#FFE3E2", "#D8F2E3", "#F5E6A3"];
+            const bgColor = service.color || colors[i % colors.length];
             const number = String(i + 1).padStart(2, "0");
+
+            // Staggered layout offsets for desktop (lg) and tablet (sm)
+            const offsets = [
+              "sm:mt-0 lg:mt-0",
+              "sm:mt-12 lg:mt-16",
+              "sm:mt-0 lg:mt-28",
+              "sm:mt-12 lg:mt-8"
+            ];
+            const offsetClass = offsets[i % offsets.length];
 
             // Resolve icon source
             let iconSrc: string | null = null;
@@ -135,54 +90,74 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
             return (
               <motion.article
                 key={service._id}
-                className="group relative flex flex-col rounded-[28px] p-8 md:p-9 min-h-[280px] md:min-h-[320px] lg:min-h-[360px] overflow-hidden cursor-pointer border-2 border-black/5 transition-all duration-350 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-105 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]"
-                style={{ backgroundColor: bgColor }}
+                className={`group relative ${offsetClass} transition-all duration-500`}
                 variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
               >
-                {/* Icon */}
-                <div className="w-14 h-14 flex items-center justify-center shrink-0 mb-6">
-                  {iconSrc ? (
-                    <Image
-                      src={iconSrc}
-                      alt={service.title}
-                      width={56}
-                      height={56}
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <span className="text-[2rem] font-bold text-black/25">
-                      ✦
-                    </span>
-                  )}
-                </div>
-
-                {/* Body */}
-                <div className="flex flex-col flex-1 z-10">
-                  <h3 className="text-[22px] font-bold text-neutral-900 mb-2 leading-[1.2]">
-                    {service.title}
-                  </h3>
-                  <p className="text-[14px] leading-[1.6] text-black/55 max-w-[280px]">
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Arrow */}
-                <div className="mt-auto pt-5 z-10 w-fit shrink-0">
-                  <span
-                    className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-all duration-250 ease-out border-none cursor-pointer group-hover:translate-x-1 group-hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)]"
-                    aria-hidden="true"
-                  >
-                    <ArrowIcon />
-                  </span>
-                </div>
-
-                {/* Watermark number */}
-                <span
-                  className="absolute bottom-1 right-4 text-[clamp(5rem,10vw,7.5rem)] font-black leading-none tracking-tight text-black/5 pointer-events-none select-none"
-                  aria-hidden="true"
+                {/* Main Colored Card */}
+                <div
+                  className="relative flex flex-col gap-5 rounded-[40px] sm:rounded-[50px] lg:rounded-[60px] p-6 sm:p-8 md:p-10 transition-transform duration-300 overflow-hidden aspect-square sm:aspect-[1/1.1]"
+                  style={{
+                    backgroundColor: bgColor,
+                    // apply shadow base on even or odd top for odd bottom for even
+                    boxShadow: (i + 1) % 2 === 0 ? "0px 5px 0px 0px rgba(0, 0, 0, 1)" : "0px -5px 0px 0px rgba(0, 0, 0, 1)"
+                  }}
                 >
-                  {number}
-                </span>
+
+
+                  <div className="flex-1 relative z-10">
+                    {/* Icon Area */}
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-6 sm:mb-8 relative">
+                      <div className="absolute inset-0 bg-black/5 rounded-full scale-125 sm:scale-150 blur-sm" />
+                      {iconSrc ? (
+                        <Image
+                          src={iconSrc}
+                          alt={service.title}
+                          width={60}
+                          height={60}
+                          className="relative z-10 object-contain w-[50px] sm:w-[71px]"
+                        />
+                      ) : (
+                        <span className="relative z-10 text-[2.5rem] font-bold text-black/20">
+                          ✦
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex justify-between">
+                      <h3 className="text-[18px] sm:text-[20px] font-boldonse font-normal capitalize text-black">
+                        {service.title.split(" ").map((word, idx) => (
+                          <span key={idx} className="block">{word}</span>
+                        ))}
+                      </h3>
+
+                      {/* Card Number (Right Side) */}
+                      <div className="pointer-events-none select-none">
+                        <span
+                          className="text-[40px] sm:text-[50px] font-boldonse font-normal leading-none text-black/10 block transition-transform duration-500 group-hover:scale-110 group-hover:translate-x-[-10px]"
+                        >
+                          {number}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="flex flex-col gap-8 relative z-10">
+                    <div className="flex justify-start">
+                      <Image
+                        src={i === 1 ? "/arrow_black.svg" : "/arrow_white.svg"}
+                        alt="View Details"
+                        width={60}
+                        height={60}
+                        className="transition-transform duration-300 group-hover:translate-x-1 w-[50px] sm:w-[69px]"
+                      />
+                    </div>
+                  </div>
+                </div>
               </motion.article>
             );
           })}

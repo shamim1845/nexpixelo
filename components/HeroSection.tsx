@@ -17,7 +17,17 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.12, ease: EASE },
+    transition: { duration: 0.7, delay: i * 0.15, ease: EASE },
+  }),
+};
+
+const decorationEntrance = {
+  hidden: { opacity: 0, scale: 0.6, rotate: -10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: { duration: 0.8, delay: 0.4 + i * 0.15, ease: EASE },
   }),
 };
 
@@ -57,7 +67,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
 
   return (
     <section
-      className="relative overflow-hidden min-h-[calc(100dvh-58px)] flex items-center justify-center px-5 py-12 md:py-16 md:px-8 lg:py-20 lg:px-10"
+      className="relative overflow-hidden flex items-center justify-center px-5 md:px-8 lg:px-10 pt-16 pb-32 md:pt-24 md:pb-48 lg:pt-30 lg:pbe-60 "
       id="hero-section"
     >
       {/* Disable infinite animations inside the Sanity Presentation Tool iframe */}
@@ -68,37 +78,132 @@ export default function HeroSection({ data }: HeroSectionProps) {
 
       <div className="relative z-20 w-full max-w-[1200px] mx-auto">
         {/* ---------- Star decorations ---------- */}
-        <div className="hidden md:block absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
+          {/* Top  badge */}
           <motion.div
-            className="absolute top-[2%] left-[35%] xl:top-[5%] xl:left-[32%]"
-            {...float(0, 4, 10, typeof window !== "undefined" && window.self !== window.parent)}
+            className="hidden lg:block absolute left-1/2  -translate-x-1/2 top-[-15%] -rotate-[9deg]"
+            variants={decorationEntrance}
+            custom={0}
+            initial="hidden"
+            animate="visible"
           >
-            <Image src="/star_purple.svg" alt="" width={50} height={48} />
+            <motion.div
+              {...float(1.5, 4, 5, typeof window !== "undefined" && window.self !== window.parent)}
+            >
+              <div
+                className="inline-flex items-center w-fit h-[60px] px-8 py-2 rounded-full text-[20px] font-semibold text-foreground no-underline bg-[#FFFFFF33] border border-white/70 transition-colors duration-200 whitespace-nowrap relative"
+              >
+                <Image src="/star_white.svg" alt="" width={50} height={48}
+                  className="absolute left-[-5px] top-[-5px] w-[28px] h-[28px]" />
+
+                Creative Agency
+              </div>
+            </motion.div>
           </motion.div>
+
+          {/* Center  badge left*/}
           <motion.div
-            className="absolute top-[15%] right-[15%] xl:top-[10%] xl:right-[12%]"
-            {...float(0.5, 3.5, 8, typeof window !== "undefined" && window.self !== window.parent)}
+            className="hidden xl:block absolute left-[-10%] bottom-[50%] -rotate-[32deg]"
+            variants={decorationEntrance}
+            custom={1}
+            initial="hidden"
+            animate="visible"
           >
-            <Image src="/star_orange_group.svg" alt="" width={56} height={52} />
+            <motion.div
+              {...float(1.7, 4, 5, typeof window !== "undefined" && window.self !== window.parent)}
+            >
+              <div
+                className="inline-flex items-center w-fit h-[60px] p-1 rounded-full text-[20px] font-semibold text-foreground no-underline bg-[#C1BFFF] transition-colors duration-200 whitespace-nowrap relative shadow-[3px_6px_0_0_#0000001A] pointer-events-auto"
+              >
+                <div className="w-full h-full flex items-center gap-3 border border-[#0a0a0a] rounded-[40px] px-6 py-2 md:px-8 md:py-3 ">
+
+                  <Image src="/star_white.svg" alt="" width={50} height={48}
+                    className="absolute right-[-1px] top-[-7px] w-[28px] h-[28px] rotate-[32deg]" />
+
+                  Digital Branding
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
+
+          {/* Center  badge right*/}
           <motion.div
-            className="absolute bottom-[30%] left-[12%] xl:bottom-[35%] xl:left-[15%]"
-            {...float(1, 3, 6, typeof window !== "undefined" && window.self !== window.parent)}
+            className="hidden xl:block absolute right-[-10%] bottom-[40%] rotate-[25deg]"
+            variants={decorationEntrance}
+            custom={2}
+            initial="hidden"
+            animate="visible"
           >
-            <Image src="/star_white.svg" alt="" width={22} height={22} />
+            <motion.div
+              {...float(1.9, 4, 5, typeof window !== "undefined" && window.self !== window.parent)}
+            >
+              <div
+                className="inline-flex items-center w-fit h-[60px] p-1 rounded-full text-[20px] font-semibold text-foreground no-underline bg-[#C1BFFF] transition-colors duration-200 whitespace-nowrap relative shadow-[3px_6px_0_0_#0000001A] pointer-events-auto"
+              >
+                <div className="w-full h-full flex items-center gap-3 border border-[#0a0a0a] rounded-[40px] px-6 py-2 md:px-8 md:py-3 ">
+
+                  <Image src="/star_white.svg" alt="" width={50} height={48}
+                    className="absolute right-[-1px] top-[-7px] w-[28px] h-[28px] rotate-[32deg]" />
+
+                  UI/UX Design
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
+
+          {/* Top Stars */}
           <motion.div
-            className="absolute bottom-[20%] right-[25%] xl:bottom-[25%] xl:right-[22%]"
-            {...float(0.3, 3.8, 7, typeof window !== "undefined" && window.self !== window.parent)}
+            className="absolute top-[4%] left-[15%] md:top-[5%] md:left-[18%] lg:top-[8%] lg:left-[20%]"
+            variants={decorationEntrance}
+            custom={3}
+            initial="hidden"
+            animate="visible"
           >
-            <Image src="/star_orange.svg" alt="" width={28} height={28} />
+            <motion.div
+              {...float(2.1, 4, 10, typeof window !== "undefined" && window.self !== window.parent)}
+            >
+              <Image src="/star_purple.svg" alt="" width={50} height={48}
+                className="w-[34px] h-auto lg:w-[40px] xl:w-[50px]" />
+            </motion.div>
           </motion.div>
+
+          <motion.div
+            className="absolute top-[4%] right-[15%] md:top-[5%] md:right-[18%] lg:top-[8%] lg:right-[20%]"
+            variants={decorationEntrance}
+            custom={4}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div
+              {...float(2.3, 3.5, 8, typeof window !== "undefined" && window.self !== window.parent)}
+            >
+              <Image src="/star_orange.svg" alt="" width={56} height={52} className="w-[34px] h-auto lg:w-[40px] xl:w-[50px]" />
+            </motion.div>
+          </motion.div>
+
+          {/* Bottom Stars */}
+          <motion.div
+            className="absolute bottom-[12%] left-[2%]"
+            variants={decorationEntrance}
+            custom={5}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div
+              {...float(2.5, 3, 6, typeof window !== "undefined" && window.self !== window.parent)}
+            >
+              <Image src="/star_orange_group.svg" alt="" width={56} height={52} className="w-[34px] h-auto lg:w-[40px] xl:w-[50px]" />
+            </motion.div>
+          </motion.div>
+
+
+
         </div>
 
         {/* ---------- Main content ---------- */}
         <div className="relative z-20 text-center flex flex-col items-center gap-6 lg:gap-8">
           <motion.h1
-            className="text-[clamp(2.5rem,8vw,6rem)] font-black leading-none tracking-[-0.02em] md:tracking-[-0.03em] uppercase text-foreground max-w-[900px]"
+            className="text-[clamp(2.5rem,8vw,6rem)] font-black font-boldonse font-normal uppercase text-foreground max-w-[950px] leading-[1.5] tracking-wide"
             custom={0}
             variants={fadeUp}
             initial="hidden"
@@ -112,7 +217,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
           </motion.h1>
 
           <motion.p
-            className="text-[clamp(0.9375rem,1.5vw,1.125rem)] leading-[1.6] text-[#666] max-w-[500px] lg:max-w-[540px] mx-auto"
+            className="text-[clamp(0.9375rem,1.5vw,1.125rem)] leading-[1.6] text-[#000000] max-w-[500px] lg:max-w-[540px] mx-auto"
             custom={1}
             variants={fadeUp}
             initial="hidden"
@@ -128,23 +233,13 @@ export default function HeroSection({ data }: HeroSectionProps) {
             initial="hidden"
             animate="visible"
           >
-            <Link
-              href={primaryCta.href ?? "/contact"}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-semibold no-underline transition-all duration-200 ease-out whitespace-nowrap bg-[#0a0a0a] text-white shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 active:translate-y-0"
-            >
-              {primaryCta.label ?? "Start"}
-              <Image
-                src="/arrow_white.svg"
-                alt=""
-                width={28}
-                height={28}
-                className="shrink-0"
-              />
-            </Link>
 
-            <motion.div className="hidden sm:flex" {...float(0, 2.5, 5, typeof window !== "undefined" && window.self !== window.parent)}>
-              <Image src="/star_orange.svg" alt="" width={20} height={20} />
-            </motion.div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center w-fit h-[50px] xl:h-[60px] px-8 md:px-10 lg:px-12 py-2 ml-1 rounded-full text-[14px] xl:text-[16px] font-medium text-white bg-[#000000] border border-black shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-200 whitespace-nowrap hover:-translate-y-[1px] hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] active:translate-y-0"
+            >
+              {primaryCta.label ?? "Let's Connect"}
+            </Link>
           </motion.div>
         </div>
       </div>
@@ -152,7 +247,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
       {/* ---------- Infinite Marquee Background Overlay ---------- */}
       {marqueeList.length > 0 && (
         <div
-          className="absolute left-1/2 bottom-[12%] md:bottom-[5%] w-[120vw] -translate-x-1/2 -rotate-[4deg] overflow-hidden pointer-events-none z-10 flex"
+          className="absolute left-1/2 bottom-[0%] md:bottom-[2%] lg:bottom-[3%] xl:bottom-[5%] w-[120vw] -translate-x-1/2 -rotate-[4deg] overflow-hidden pointer-events-none z-10 flex"
           aria-hidden="true"
         >
           <motion.div
@@ -167,18 +262,21 @@ export default function HeroSection({ data }: HeroSectionProps) {
                 return (
                   <div
                     key={`${item._key}-${i}`}
-                    className="flex items-center gap-3 px-8 mx-3 py-3 md:py-4 rounded-[40px] border-2 md:border-[3px] border-[#0a0a0a] shadow-[4px_4px_0_0_#0a0a0a] md:shadow-[6px_6px_0_0_#0a0a0a] pointer-events-auto"
+                    className="flex items-center gap-3 px-2 py-1.5 md:px-3 md:py-1.5 mx-2 md:mx-3 rounded-[40px] shadow-[4px_4px_0_0_#0a0a0a] md:shadow-[6px_6px_0_0_#0a0a0a] pointer-events-auto"
                     style={{ backgroundColor: bgColor }}
                   >
-                    <span className="text-[17px] md:text-[22px] font-bold text-[#0a0a0a] leading-none whitespace-nowrap">
-                      {item.text_1}
-                    </span>
-                    <span className="text-[20px] md:text-[26px] opacity-80 px-2 text-[#0a0a0a] leading-none">
-                      ✦
-                    </span>
-                    <span className="text-[17px] md:text-[22px] font-bold text-[#0a0a0a] leading-none whitespace-nowrap">
-                      {item.text_2}
-                    </span>
+                    <div className="w-full h-full flex items-center gap-3 border-2 border-[#0a0a0a] rounded-[40px] px-6 py-2 md:px-8 md:py-3 ">
+
+                      <span className="text-[17px] md:text-[22px] lg:text-[28px] font-semibold text-[#0a0a0a] leading-none whitespace-nowrap">
+                        {item.text_1}
+                      </span>
+                      <span className="text-[20px] md:text-[26px] lg:text-[28px] opacity-80 px-2 text-[#0a0a0a] leading-none">
+                        ✦
+                      </span>
+                      <span className="text-[17px] md:text-[22px] lg:text-[28px] font-semibold text-[#0a0a0a] leading-none whitespace-nowrap">
+                        {item.text_2}
+                      </span>
+                    </div>
                   </div>
                 );
               }

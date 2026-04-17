@@ -22,17 +22,14 @@ export default async function HomePage() {
     getPosts(),
   ]);
 
-  console.log({ posts });
+  // console.log({ services: JSON.stringify(services, null, 2) });
 
 
   return (
     <main className="">
       <div
-        style={{
-          background: "linear-gradient(180deg, #E4E3FF 0%, #FFE6F9 43.27%, #FFFFFF 100%)",
-        }}
+
       >
-        <Navbar />
         <HeroSection data={homeData?.hero} />
         <ServicesSection services={services} />
       </div>
