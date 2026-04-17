@@ -98,7 +98,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
               >
                 {/* Main Colored Card */}
                 <div
-                  className="relative flex flex-col gap-5 rounded-[40px] sm:rounded-[50px] lg:rounded-[60px] p-6 sm:p-8 md:p-10 transition-transform duration-300 overflow-hidden aspect-square sm:aspect-[1/1.1]"
+                  className="relative flex flex-col gap-5 rounded-[40px] sm:rounded-[50px] lg:rounded-[60px] p-6 sm:p-8 md:p-10 transition-transform duration-300 overflow-hidden  min-h-min"
                   style={{
                     backgroundColor: bgColor,
                     // apply shadow base on even or odd top for odd bottom for even
@@ -143,13 +143,19 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                         </span>
                       </div>
                     </div>
+
+                    {/* Description */}
+                    <div className="pt-2 w-full max-w-[70%]">
+                      <p className="text-base sm:text-[18px] font-normal">{service.description}</p>
+                    </div>
                   </div>
+
 
                   {/* Footer */}
                   <div className="flex flex-col gap-8 relative z-10">
                     <div className="flex justify-start">
                       <Image
-                        src={i === 1 ? "/arrow_black.svg" : "/arrow_white.svg"}
+                        src={(i + 1) % 2 === 0 ? "/arrow_black.svg" : "/arrow_white.svg"}
                         alt="View Details"
                         width={60}
                         height={60}
