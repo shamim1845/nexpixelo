@@ -220,9 +220,9 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[16px] font-semibold text-black hover:text-[#7571ff] transition-all duration-200 cursor-pointer group"
+                  className="inline-flex items-center gap-2 rounded-full px-2 py-2 text-[16px] font-semibold text-black hover:text-[#7571ff] transition-all duration-200 cursor-pointer group"
                 >
-                  Subscribe
+                  <span className="hidden sm:block"> Subscribe</span>
                   <span aria-hidden="true"><svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover:fill-[#7571ff]">
                     <g clipPath="url(#clip0_1_31)">
                       <path d="M23.8412 11.1316L18.3868 5.9044C18.1909 5.68514 17.8466 5.65958 17.6178 5.8474C17.389 6.03517 17.3623 6.36515 17.5583 6.58441C17.5766 6.60485 17.5965 6.62394 17.6178 6.64142L22.1395 10.98H0.545425C0.244213 10.98 0 11.214 0 11.5027C0 11.7914 0.244213 12.0254 0.545425 12.0254H22.1395L17.6178 16.3587C17.389 16.5465 17.3623 16.8764 17.5583 17.0957C17.7543 17.315 18.0986 17.3405 18.3274 17.1527C18.3487 17.1352 18.3686 17.1161 18.3868 17.0957L23.8413 11.8685C24.0527 11.6647 24.0527 11.3355 23.8412 11.1316Z" fill="currentColor" />

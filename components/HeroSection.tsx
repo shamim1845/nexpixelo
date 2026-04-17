@@ -153,7 +153,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
 
           {/* Top Stars */}
           <motion.div
-            className="absolute top-[4%] left-[15%] md:top-[5%] md:left-[18%] lg:top-[8%] lg:left-[20%]"
+            className="absolute top-[4%] left-[0%] md:top-[5%] md:left-[18%] lg:top-[8%] lg:left-[20%]"
             variants={decorationEntrance}
             custom={3}
             initial="hidden"
@@ -168,7 +168,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
           </motion.div>
 
           <motion.div
-            className="absolute top-[4%] right-[15%] md:top-[5%] md:right-[18%] lg:top-[8%] lg:right-[20%]"
+            className="absolute top-[4%] right-[0%] md:top-[5%] md:right-[18%] lg:top-[8%] lg:right-[20%]"
             variants={decorationEntrance}
             custom={4}
             initial="hidden"
