@@ -101,6 +101,7 @@ export interface AboutSection {
 /** About CTA section fields. */
 export interface AboutCtaSection {
   heading: string | null;
+  statValue: string | null;
   description: string | null;
   image: SanityImage | null;
 }

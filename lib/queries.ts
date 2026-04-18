@@ -103,6 +103,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
     },
     aboutCta {
       heading,
+      statValue,
       description,
       image
     }

@@ -157,6 +157,12 @@ export const homePage = defineType({
           description: 'e.g. "DESIGN THAT DEFINES YOUR IDENTITY"',
         }),
         defineField({
+          name: "statValue",
+          title: "Stat Value",
+          type: "string",
+          description: 'e.g. "06+", "10+"',
+        }),
+        defineField({
           name: "description",
           title: "Description",
           type: "text",

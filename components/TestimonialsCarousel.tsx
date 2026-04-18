@@ -25,11 +25,11 @@ export default function TestimonialsCarousel({
 
   return (
     <section
-      className="overflow-hidden px-4 py-16 md:px-8 md:py-20 lg:px-10"
+      className="overflow-hidden px-4 mt-20 md:px-8 md:mt-24 lg:mt-28 lg:px-10"
       id="testimonials-section"
     >
       <motion.div
-        className="flex w-max items-stretch gap-4 md:gap-5"
+        className="flex w-max items-stretch gap-4 md:gap-5 lg:gap-6"
         animate={{ x: isStudio ? "0%" : ["0%", "-33.333%"] }}
         transition={isStudio ? {} : { duration: 28, ease: "linear", repeat: Infinity }}
       >
@@ -42,32 +42,35 @@ export default function TestimonialsCarousel({
           return (
             <article
               key={`${item._id}-${index}`}
-              className="flex min-h-[250px] w-[286px] flex-col rounded-[4px] border border-black/10 px-6 py-7"
-              style={{ backgroundColor: bgColor }}
+              className="flex min-h-[250px] w-[280px] sm:w-[340px] md:w-[400px] flex-col rounded-[10px] p-5 md:p-7"
+              style={{
+                backgroundColor: bgColor,
+
+                transform: `rotate(${[-2, 0, 2, 0][index % 4]}deg)`
+              }}
             >
-              <p className="text-[28px] leading-none text-black/40">"</p>
-              <p className="mt-2 line-clamp-7 text-[29px] font-medium leading-[1.45] text-black/90">
+              <p className="mt-2 line-clamp-7 text-[18px] sm:text-[20px] md:text-[24px] font-medium leading-[1.45] text-black">
                 {item.quote}
               </p>
 
-              <div className="mt-auto flex items-end justify-between gap-3 pt-6">
-                <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-white/90">
+              <div className="mt-auto flex items-end gap-3 pt-6 md:pt-8">
+                <span className="relative h-10 w-10 md:h-12 md:w-12 shrink-0 overflow-hidden rounded-full bg-white/90">
                   {avatarUrl && (
                     <Image
                       src={avatarUrl}
                       alt={item.name}
                       fill
-                      sizes="40px"
+                      sizes="60px"
                       className="object-cover"
                     />
                   )}
                 </span>
 
-                <div className="text-right leading-tight">
-                  <p className="text-[17px] font-semibold text-black/95">
+                <div className="leading-tight">
+                  <p className="text-[18px] sm:text-[20px] md:text-[24px] font-medium text-black">
                     {item.name}
                   </p>
-                  <p className="text-[14px] text-black/45">{item.role}</p>
+                  <p className="text-[14px] sm:text-[16px] md:text-[18px] text-medium text-[#666567]">{item.role}</p>
                 </div>
               </div>
             </article>

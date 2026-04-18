@@ -21,7 +21,7 @@ export default async function HomePage() {
     getPosts(),
   ]);
 
-  console.log({ projects: JSON.stringify(projects, null, 2) });
+  console.log({ homeData: JSON.stringify(homeData, null, 2) });
 
 
   return (
@@ -36,10 +36,10 @@ export default async function HomePage() {
       </div>
 
 
-      {/* <div className="bg-white">
+      <div className="bg-white py-20 md:py-24 lg:py-28">
         <AboutSection about={homeData?.about} aboutCta={homeData?.aboutCta} />
         <TestimonialsCarousel testimonials={testimonials} />
-      </div> */}
+      </div>
 
 
       {/*       
