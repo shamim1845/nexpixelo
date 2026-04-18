@@ -11,7 +11,6 @@ import LatestNewsSection from "@/components/LatestNewsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ServicesSection from "@/components/ServicesSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
-import Navbar from "@/components/Navbar";
 
 export default async function HomePage() {
   const [homeData, services, projects, testimonials, posts] = await Promise.all([
@@ -22,21 +21,19 @@ export default async function HomePage() {
     getPosts(),
   ]);
 
-  // console.log({ services: JSON.stringify(services, null, 2) });
+  console.log({ projects: JSON.stringify(projects, null, 2) });
 
 
   return (
     <main className="">
-      <div
-
-      >
+      <div>
         <HeroSection data={homeData?.hero} />
         <ServicesSection services={services} />
       </div>
 
-      {/* <div className="bg-[#E4DFFF]">
+      <div className="bg-[#DBDAFF]">
         <ProjectsSection projects={projects} />
-      </div> */}
+      </div>
 
 
       {/* <div className="bg-white">
