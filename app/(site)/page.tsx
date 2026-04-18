@@ -21,7 +21,7 @@ export default async function HomePage() {
     getPosts(),
   ]);
 
-  console.log({ homeData: JSON.stringify(homeData, null, 2) });
+
 
 
   return (
@@ -41,11 +41,9 @@ export default async function HomePage() {
         <TestimonialsCarousel testimonials={testimonials} />
       </div>
 
-
-      {/*       
-      <div className="bg-[#E4DFFF]">
+      <div className="bg-[#DBDAFF]">
         <LatestNewsSection posts={posts} />
-      </div> */}
+      </div>
     </main>
   );
 }

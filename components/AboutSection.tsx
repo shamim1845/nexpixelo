@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-
 import { urlFor } from "@/lib/sanity";
 import type { AboutCtaSection, AboutSection as AboutSectionType } from "@/types";
+import Badge from "./Badge";
+
 
 interface AboutSectionProps {
   about: AboutSectionType | null | undefined;
@@ -12,31 +12,7 @@ interface AboutSectionProps {
 }
 
 
-const EASE: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
-const decorationEntrance = {
-  hidden: { opacity: 0, scale: 0.6, rotate: -10 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    rotate: 0,
-    transition: { duration: 0.8, delay: 0.4 + i * 0.15, ease: EASE },
-  }),
-};
-
-const float = (delay: number, duration: number, y: number, isStudio: boolean) => ({
-  initial: { y: 0 },
-  animate: {
-    y: isStudio ? 0 : [0, -y, 0],
-    transition: isStudio ? {} : {
-      duration,
-      delay,
-      repeat: Infinity,
-      repeatType: "loop" as const,
-      ease: "easeInOut" as const,
-    },
-  },
-});
 
 
 export default function AboutSection({ about, aboutCta }: AboutSectionProps) {
@@ -48,37 +24,19 @@ export default function AboutSection({ about, aboutCta }: AboutSectionProps) {
     : null;
 
   return (
-    <section className="content_container" id="about-section">
+    <section className="content_container" id="about">
       <div className="flex flex-col gap-16 md:gap-20 lg:gap-24">
         <div className="flex items-start justify-center lg:justify-between flex-col lg:flex-row gap-12 lg:gap-8">
           {/* heading and sub heading */}
           <div className="relative flex flex-col gap-8 md:gap-12 lg:gap-14 w-full lg:max-w-[60%]">
             {/* Top  badge */}
-            <motion.div
-              className="-rotate-[6deg]"
-              variants={decorationEntrance}
-              custom={1}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.div
-                {...float(1.7, 4, 5, typeof window !== "undefined" && window.self !== window.parent)}
-              >
-                <div
-                  className="inline-flex items-center w-fit h-[45px] md:h-[60px] p-0.5 md:p-1 rounded-full text-[14px] md:text-[20px] font-semibold text-foreground no-underline transition-colors duration-200 whitespace-nowrap relative shadow-[2px_4px_0_0_#000000] md:shadow-[3px_6px_0_0_#000000] pointer-events-auto"
-
-                  style={{
-                    backgroundColor: "#FFB44B"
-                  }}
-                >
-                  <Image src="/star_white.svg" alt="" width={50} height={48}
-                    className="absolute left-[-5px] top-[-5px] w-[24px] h-[24px] md:w-[28px] md:h-[28px]" />
-                  <div className="w-full h-full flex items-center gap-2 md:gap-3 border-2 border-[#0a0a0a] rounded-[40px] px-4 py-1 md:px-8 md:py-3 ">
-                    About Agency
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+            <Badge
+              text="About Agency"
+              className="z-10"
+              rotation="-rotate-[6deg]"
+              index={1}
+              delayOffset={0.2}
+            />
 
             <h2 className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[clamp(3rem,5vw,120px)] font-boldonse uppercase text-black">
               {about?.heading ?? ""}

@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+import { EASE } from "@/lib/animations";
 
 const footerVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -34,6 +33,7 @@ export default function Footer() {
   return (
     <footer
       className="pt-16 pb-10"
+      id="contact"
       style={{
         background: "linear-gradient(120deg, rgba(255, 255, 255, 0) 10%, rgba(234, 244, 122, 0.7) 36.84%, rgba(255, 255, 255, 0.224) 65.38%)",
       }}
@@ -47,7 +47,7 @@ export default function Footer() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <h2 className="text-[clamp(1.5rem,6.7vw,96px)] font-black font-boldonse font-normal uppercase text-black">
+          <h2 className="text-[clamp(1.5rem,6.7vw,96px)] font-black font-boldonse uppercase text-black">
             Get <span className="inline-block align-middle">
               <Image
                 src="/smile_emoji.svg"

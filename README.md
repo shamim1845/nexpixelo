@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexpixelo — Digital Creativity Agency
 
-## Getting Started
+A premium, neobrutalist agency website built with **Next.js 15**, **Sanity CMS**, **Tailwind CSS**, and **Framer Motion**.
 
-First, run the development server:
+## 🚀 Technology Stack
 
+- **Framework:** [Next.js 15 (App Router)](https://nextjs.org/)
+- **CMS:** [Sanity.io](https://www.sanity.io/) (Headless CMS)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Icons & Images:** Sanity Image URL Builder & Next.js Image optimization
+
+## ✨ Key Features
+
+- **Neobrutalist Design:** Premium aesthetic with bold typography, custom pastel palettes, and sharp shadows.
+- **Fully Responsive:** Optimized for all devices from mobile to large desktops.
+- **Dynamic Content:** All sections (Hero, About, Services, Projects, Testimonials, News) are editable via Sanity CMS.
+- **Smart Navigation:** Sticky navbar that hides on scroll down and reveals on scroll up for better UX.
+- **Smooth Scrolling:** Integrated anchor navigation with a smooth feel.
+- **Infinite Marquee:** High-performance marquee sections for testimonials and project lists.
+
+## 🛠️ Getting Started
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Set Up Environment Variables
+Create a `.env.local` file and add your Sanity credentials:
+```env
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_READ_TOKEN=your_token
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Run Development Server
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to view the result.
 
-## Learn More
+## 📝 Content Management
 
-To learn more about Next.js, take a look at the following resources:
+To edit the website content, log in to your Sanity Studio:
+```bash
+# Usually accessible via /studio route or a separate deployment
+npx sanity start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📜 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2026 Nexpixelo. All Rights Reserved.

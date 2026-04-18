@@ -57,7 +57,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
   if (!services || services.length === 0) return null;
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-24 lg:py-28" id="services-section">
+    <section className="relative overflow-hidden py-20 md:py-24 lg:py-28" id="services">
       <div className="content_container">
 
         {/* Cards grid */}
