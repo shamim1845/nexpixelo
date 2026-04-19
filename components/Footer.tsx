@@ -67,7 +67,9 @@ export default function Footer() {
           </h2>
 
           <div className="w-fit">
-            <Image src="/arrow_purple_external.svg" alt="" width={232} height={232} className="w-[100px] md:w-[180px] lg:w-[232px] h-auto" />
+            <Link href="/contact">
+              <Image src="/arrow_purple_external.svg" alt="" width={232} height={232} className="w-[100px] md:w-[180px] lg:w-[232px] h-auto hover:rotate-45 transition-all duration-500" />
+            </Link>
           </div>
         </motion.div>
 
