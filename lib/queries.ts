@@ -79,6 +79,7 @@ export const SERVICES_QUERY = defineQuery(`
     iconImage,
     cardNumberIcon,
     color,
+    navigationUrl,
     order
   }
 `);

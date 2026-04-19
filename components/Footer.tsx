@@ -35,7 +35,12 @@ export default function Footer() {
       className="pt-16 pb-10"
       id="contact"
       style={{
-        background: "linear-gradient(120deg, rgba(255, 255, 255, 0) 10%, rgba(234, 244, 122, 0.7) 36.84%, rgba(255, 255, 255, 0.224) 65.38%)",
+        // background: "linear-gradient(120deg, rgba(255, 255, 255, 0) 10%, rgba(234, 244, 122, 0.7) 36.84%, rgba(255, 255, 255, 0.224) 65.38%)",
+        background: "url(/footer_bg.svg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+
       }}
     >
       <div className="content_container">
@@ -77,7 +82,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="inline-flex">
               <Image
-                src="/logo_footer.svg"
+                src="/logo.svg"
                 alt="Nexpixelo"
                 width={166}
                 height={46}

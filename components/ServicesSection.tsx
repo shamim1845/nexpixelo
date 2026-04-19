@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { urlFor } from "@/lib/sanity";
 
 import type { Service } from "@/types";
@@ -92,7 +93,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
               cardNumberIconSrc = urlFor(service.cardNumberIcon).width(120).height(120).url();
             }
 
-            return (
+            const card = (
               <motion.article
                 key={service._id}
                 className={`group relative ${offsetClass} transition-all duration-500`}
@@ -177,6 +178,16 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                 </div>
               </motion.article>
             );
+
+            if (service.navigationUrl) {
+              return (
+                <Link key={service._id} href={service.navigationUrl} className="contents">
+                  {card}
+                </Link>
+              );
+            }
+
+            return card;
           })}
         </motion.div>
       </div>

@@ -65,6 +65,12 @@ export const service = defineType({
       description: "Lower numbers appear first.",
       initialValue: 0,
     }),
+    defineField({
+      name: "navigationUrl",
+      title: "Navigation URL",
+      type: "string",
+      description: "The internal path where this service card should lead to (e.g. /services/ui-ux).",
+    }),
   ],
   preview: {
     select: {

@@ -64,7 +64,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   return (
     <section
       className="content_container py-20 md:py-24 lg:py-28"
-      id="projects-section"
+      id="projects"
     >
       <div>
         {/* heading and sub heading */}
@@ -111,6 +111,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
             return (
               <article
                 key={project._id}
+                id={`project-${project.slug}`}
                 className="grid gap-6 rounded-[10px] p-5 md:p-10  lg:p-14 md:grid-cols-[1.15fr_1fr] md:gap-7 lg:gap-10"
                 style={{ background: cardBackground }}
               >

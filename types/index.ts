@@ -79,6 +79,7 @@ export interface Service {
   iconImage: SanityImage | null;
   cardNumberIcon: SanityImage | null;
   color: string | null;
+  navigationUrl: string | null;
   order: number | null;
 }
 
