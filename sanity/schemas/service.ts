@@ -41,6 +41,13 @@ export const service = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: "cardNumberIcon",
+      title: "Card Number Icon",
+      type: "image",
+      description: "Upload a custom card number icon. It will be placed at the top right corner of the card.",
+      options: { hotspot: true },
+    }),
+    defineField({
       name: "color",
       title: "Accent Color",
       type: "string",

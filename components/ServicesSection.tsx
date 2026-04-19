@@ -68,7 +68,6 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
           {services.map((service, i) => {
             const colors = ["#E7E6FF", "#FFE3E2", "#D8F2E3", "#F5E6A3"];
             const bgColor = service.color || colors[i % colors.length];
-            const number = String(i + 1).padStart(2, "0");
 
             // Staggered layout offsets for desktop (lg) and tablet (sm)
             const offsets = [
@@ -85,6 +84,12 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
               iconSrc = urlFor(service.iconImage).width(120).height(120).url();
             } else if (service.icon) {
               iconSrc = ICON_MAP[service.icon] ?? null;
+            }
+
+            // resolve card number icon source
+            let cardNumberIconSrc: string | null = null;
+            if (service.cardNumberIcon) {
+              cardNumberIconSrc = urlFor(service.cardNumberIcon).width(120).height(120).url();
             }
 
             return (
@@ -115,9 +120,9 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                         <Image
                           src={iconSrc}
                           alt={service.title}
-                          width={60}
-                          height={60}
-                          className="relative z-10 object-contain w-[50px] sm:w-[71px]"
+                          width={71}
+                          height={71}
+                          className="relative z-10 object-contain w-[50px] sm:w-[71px] h-auto"
                         />
                       ) : (
                         <span className="relative z-10 text-[2.5rem] font-bold text-black/20">
@@ -127,27 +132,33 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                     </div>
 
                     {/* Content */}
-                    <div className="flex justify-between">
-                      <h3 className="text-[18px] sm:text-[20px] font-boldonse font-normal capitalize text-black">
-                        {service.title.split(" ").map((word, idx) => (
-                          <span key={idx} className="block">{word}</span>
-                        ))}
+                    <div className="flex justify-between gap-3">
+                      <h3 className="flex-1 text-[18px] sm:text-[20px] font-boldonse font-normal capitalize text-black">
+                        {service.title}
                       </h3>
 
                       {/* Card Number (Right Side) */}
-                      <div className="pointer-events-none select-none">
-                        <span
-                          className="text-[40px] sm:text-[50px] font-boldonse font-normal leading-none text-black/10 block transition-transform duration-500 group-hover:scale-110 group-hover:translate-x-[-10px]"
-                        >
-                          {number}
-                        </span>
+                      <div className="w-fit pointer-events-none select-none">
+
+                        {
+                          cardNumberIconSrc && (
+                            <Image
+                              src={cardNumberIconSrc}
+                              alt={service.title}
+                              width={50}
+                              height={50}
+                              sizes="(max-width: 768px) 50px, 50px"
+                              className="relative z-10 object-contain"
+                            />
+                          )
+                        }
                       </div>
                     </div>
 
                     {/* Description */}
-                    <div className="pt-2 w-full max-w-[70%]">
+                    {/* <div className="pt-2 w-full max-w-[70%]">
                       <p className="text-base sm:text-[18px] font-normal">{service.description}</p>
-                    </div>
+                    </div> */}
                   </div>
 
 
@@ -159,7 +170,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                         alt="View Details"
                         width={60}
                         height={60}
-                        className="transition-transform duration-300 group-hover:translate-x-1 w-[50px] sm:w-[69px]"
+                        className="transition-transform duration-300 group-hover:translate-x-1 w-[50px] sm:w-[69px] h-auto"
                       />
                     </div>
                   </div>

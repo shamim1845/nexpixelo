@@ -77,6 +77,7 @@ export const SERVICES_QUERY = defineQuery(`
     description,
     icon,
     iconImage,
+    cardNumberIcon,
     color,
     order
   }

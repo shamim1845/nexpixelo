@@ -48,21 +48,21 @@ export default function AboutSection({ about, aboutCta }: AboutSectionProps) {
           </div>
 
           {/* stat cards */}
-          <div className="w-full lg:w-[35%] flex flex-col sm:flex-row lg:flex-col gap-5">
+          <div className="w-full lg:max-w-[400px] flex flex-col sm:flex-row lg:flex-col gap-5 items-center justify-center">
             {statCards.map((stat, index) => (
               <article
                 key={stat._key}
-                className="w-full rounded-[30px] md:rounded-[42px] border-[3px] border-black p-5 md:p-7 shadow-[5px_5px_0_0_#000]"
-                style={{ backgroundColor: index % 2 !== 0 ? "#EAE4FE" : "#FEEBE9" }}
+                className={`w-full h-full flex flex-col justify-center md:aspect-[1.1/1] rounded-[30px] md:rounded-[100px] border-[3px] border-black p-8 pl-8 md:p-7 md:pl-10 ${(index + 1) % 2 !== 0 ? "bg-[#FEEBE9] shadow-[-5px_5px_0px_0px_#000000]" : "bg-[#EAE4FE] shadow-[5px_5px_0px_0px_#000000]"
+                  }`}
               >
-                <p className="text-[clamp(2rem,3vw,3.2rem)] font-black leading-none text-black">
+                <p className="text-[clamp(2rem,3vw,50px)] font-black  font-boldonse  leading-none text-black">
                   {stat.value}
                 </p>
-                <p className="mt-3 max-w-[220px] text-[1rem] md:text-[1.1rem] font-semibold leading-[1.35] text-black/85">
+                <p className="mt-5  text-[1rem] md:text-[1.1rem] font-semibold leading-[1.35] text-black">
                   {stat.label}
                 </p>
-                <div className="mt-5">
-                  <Image src="/arrow_black.svg" alt="" width={69} height={69} className="w-[32px] h-[32px] md:w-[42px] md:h-[42px] lg:w-[69px] lg:h-[69px] object-contain" />
+                <div className="mt-8">
+                  <Image src="/arrow_black.svg" alt="" width={69} height={69} className="w-[52px] h-[52px] sm:w-[69px] sm:h-[69px] object-contain" />
                 </div>
               </article>
             ))}
@@ -70,16 +70,16 @@ export default function AboutSection({ about, aboutCta }: AboutSectionProps) {
         </div>
 
         {/* CTA Section */}
-        <article className="grid items-center gap-12 rounded-[30px] md:rounded-[60px] bg-[#E8E8FF] px-6 py-10 sm:px-10 sm:py-16 md:px-16 md:py-20 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="flex flex-col gap-10">
-            <h3 className="max-w-[700px] text-[clamp(2rem,5.5vw,64px)] font-black font-boldonse uppercase text-black">
+        <article className="grid items-center gap-12 rounded-[30px] md:rounded-[60px] bg-[#E8E8FF] px-6 py-12 sm:px-10 sm:py-16 md:px-16 md:py-20 lg:grid-cols-[1.5fr_0.5fr]">
+          <div className="max-w-[850px] flex flex-col gap-10 md:gap-16">
+            <h3 className="text-[clamp(2rem,5.5vw,64px)] font-normal font-boldonse uppercase text-black">
               {aboutCta?.heading ?? "Design That Defines Your Identity"}
             </h3>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
-              <p className="text-[clamp(4.5rem,9vw,160px)] font-black font-boldonse leading-none text-black">
+              <p className="text-[clamp(4.5rem,9vw,130px)] font-normal font-boldonse leading-none text-black">
                 {aboutCta?.statValue ?? "06+"}
               </p>
-              <p className="max-w-[300px] text-[clamp(1.1rem,1.8vw,32px)] font-medium uppercase leading-[1.2] text-black">
+              <p className="text-[clamp(1.1rem,1.8vw,32px)] font-medium uppercase leading-[1.2] text-black max-w-[450px]">
                 {aboutCta?.description ?? "Years of experience in UI UX Design"}
               </p>
             </div>
@@ -109,7 +109,7 @@ export default function AboutSection({ about, aboutCta }: AboutSectionProps) {
               </div>
 
               <div className="py-4 md:py-6 px-2">
-                <p className="text-center text-[clamp(1rem,1.5vw,1.8rem)] font-black uppercase text-black">
+                <p className="text-center text-[clamp(1rem,1.5vw,18px)] font-black uppercase text-black">
                   Drop Hi If You Sport Me
                 </p>
               </div>

@@ -54,7 +54,7 @@ export default function Footer() {
                 alt="Smile emoji"
                 width={105}
                 height={105}
-                className="w-[50px] md:w-[80px] lg:w-[105px]"
+                className="w-[50px] md:w-[80px] lg:w-[105px] h-auto"
               />
             </span>
             <br />
@@ -62,7 +62,7 @@ export default function Footer() {
           </h2>
 
           <div className="w-fit">
-            <Image src="/arrow_purple_external.svg" alt="" width={232} height={232} className="w-[100px] md:w-[180px] lg:w-[232px]" />
+            <Image src="/arrow_purple_external.svg" alt="" width={232} height={232} className="w-[100px] md:w-[180px] lg:w-[232px] h-auto" />
           </div>
         </motion.div>
 

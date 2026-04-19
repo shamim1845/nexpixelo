@@ -153,7 +153,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
 
           {/* Top Stars */}
           <motion.div
-            className="absolute top-[4%] left-[0%] md:top-[5%] md:left-[18%] lg:top-[8%] lg:left-[20%]"
+            className="absolute top-[4%] left-[0%] md:top-[5%] md:left-[18%] lg:top-[8%] lg:left-[22%]"
             variants={decorationEntrance}
             custom={3}
             initial="hidden"
@@ -163,12 +163,12 @@ export default function HeroSection({ data }: HeroSectionProps) {
               {...float(2.1, 4, 10, typeof window !== "undefined" && window.self !== window.parent)}
             >
               <Image src="/star_purple.svg" alt="" width={50} height={48}
-                className="w-[34px] h-auto lg:w-[40px] xl:w-[50px]" />
+                className="w-[34px] lg:w-[40px] xl:w-[50px] h-auto" />
             </motion.div>
           </motion.div>
 
           <motion.div
-            className="absolute top-[4%] right-[0%] md:top-[5%] md:right-[18%] lg:top-[8%] lg:right-[20%]"
+            className="absolute top-[4%] right-[0%] md:top-[5%] md:right-[18%] lg:top-[8%] lg:right-[22%]"
             variants={decorationEntrance}
             custom={4}
             initial="hidden"
@@ -177,7 +177,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
             <motion.div
               {...float(2.3, 3.5, 8, typeof window !== "undefined" && window.self !== window.parent)}
             >
-              <Image src="/star_orange.svg" alt="" width={56} height={52} className="w-[34px] h-auto lg:w-[40px] xl:w-[50px]" />
+              <Image src="/star_orange.svg" alt="" width={56} height={52} className="w-[34px] lg:w-[40px] xl:w-[50px] h-auto" />
             </motion.div>
           </motion.div>
 
@@ -192,7 +192,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
             <motion.div
               {...float(2.5, 3, 6, typeof window !== "undefined" && window.self !== window.parent)}
             >
-              <Image src="/star_orange_group.svg" alt="" width={56} height={52} className="w-[34px] h-auto lg:w-[40px] xl:w-[50px]" />
+              <Image src="/star_orange_group.svg" alt="" width={56} height={52} className="w-[34px] lg:w-[40px] xl:w-[50px] h-auto" />
             </motion.div>
           </motion.div>
 

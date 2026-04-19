@@ -77,6 +77,7 @@ export interface Service {
   description: string;
   icon: string | null;
   iconImage: SanityImage | null;
+  cardNumberIcon: SanityImage | null;
   color: string | null;
   order: number | null;
 }
@@ -87,8 +88,8 @@ export interface HeroSection {
   subtitle: string | null;
   primaryCta: CtaLink | null;
   marqueeList:
-    | { _key: string; text_1: string; text_2: string }[]
-    | null;
+  | { _key: string; text_1: string; text_2: string }[]
+  | null;
 }
 
 /** About / stats section fields. */

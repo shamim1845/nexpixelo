@@ -12,10 +12,10 @@ interface ProjectsSectionProps {
 }
 
 const CARD_BACKGROUNDS = [
-  "linear-gradient(90deg, #F7F2F7 0%, #E0DCFF 100%)",
-  "linear-gradient(90deg, #F8F3F7 0%, #ECFBE6 100%)",
-  "linear-gradient(90deg, #F6F0F8 0%, #FBE2F0 100%)",
-  "linear-gradient(90deg, #F7F0FA 0%, #F3E6FF 100%)",
+  "linear-gradient(89.43deg, #FFFFFF 0.45%, #FFE6FE 75.15%, #BDBCFF 101.34%)",
+  "linear-gradient(89.43deg, #FFFFFF 0.45%, #FFE6F7 75.15%, #EBFFE6 101.34%)",
+  "linear-gradient(89.43deg, #FFFFFF 0.45%, #F4D9FF 75.15%, #FFEDE6 101.34%)",
+  "linear-gradient(89.43deg, #FFFFFF 0.45%, #F4D9FF 75.15%, #FFEDE6 101.34%)",
 ];
 const EASE: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
@@ -52,7 +52,7 @@ const getCategoryBadgeColor = (category: string) => {
     case "website-design":
       return "#F5DC85";
     case "digital-marketing":
-      return "#f2afb5";
+      return "#F5DC85";
     default:
       return "#C1BFFF";
   }
@@ -111,7 +111,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
             return (
               <article
                 key={project._id}
-                className="grid gap-6 rounded-[10px] p-5 md:grid-cols-[1fr_1.25fr] md:gap-7 md:p-8 lg:gap-10"
+                className="grid gap-6 rounded-[10px] p-5 md:p-10  lg:p-14 md:grid-cols-[1.15fr_1fr] md:gap-7 lg:gap-10"
                 style={{ background: cardBackground }}
               >
                 <div className="flex flex-col">
@@ -122,7 +122,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                     {project.description}
                   </h3>
 
-                  <div className="mt-auto flex items-center gap-3">
+                  <div className="flex items-center gap-3">
                     <Link
                       href={href}
                       target={project.projectUrl ? "_blank" : undefined}
@@ -157,13 +157,13 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   )}
                 </div>
 
-                <div className="relative rounded-[10px] border-[4px] md:border-[6px] border-black bg-[#D9D9D9] aspect-[4/3] md:aspect-auto min-h-[250px] md:min-h-0">
+                <div className="relative rounded-[10px] border-[4px] md:border-[6px] border-black bg-[#D9D9D9] w-full h-full max-w-[662px]">
                   <Image
                     src={imageUrl}
                     alt={project.image?.alt || project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 55vw"
-                    className="object-cover w-full h-full object-top"
+                    width={1000}
+                    height={1000}
+                    className="object-cover w-full h-full object-top rounded-[6px]"
                   />
 
                   {/* Category Badge */}

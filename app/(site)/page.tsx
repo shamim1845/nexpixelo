@@ -22,11 +22,11 @@ export default async function HomePage() {
   ]);
 
 
-
-
   return (
     <main className="">
-      <div>
+      <div style={{
+        background: "linear-gradient(180deg, #E4E3FF 0%, #FFE6F9 43.27%, #FFFFFF 100%)",
+      }}>
         <HeroSection data={homeData?.hero} />
         <ServicesSection services={services} />
       </div>
@@ -34,7 +34,6 @@ export default async function HomePage() {
       <div className="bg-[#DBDAFF]">
         <ProjectsSection projects={projects} />
       </div>
-
 
       <div className="bg-white py-20 md:py-24 lg:py-28">
         <AboutSection about={homeData?.about} aboutCta={homeData?.aboutCta} />
